@@ -46,7 +46,7 @@ export default function UserDropdown(props: any) {
         <DropdownMenuTrigger asChild>
           <Button
             disabled={loading}
-            className='text-base flex items-center gap-1'
+            className='text-base flex items-center gap-1 w-auto'
             variant={'outline'}
           >
             {loading && (
