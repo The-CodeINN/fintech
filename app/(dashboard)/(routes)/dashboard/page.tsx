@@ -55,17 +55,13 @@ const Dashboard = () => {
         <div className='flex flex-col gap-4 mt-6'>
           {data.map((data) => (
             <div key={data.id}>
-              <Button className='w-full py-6 flex justify-between items-center'>
+              <Button className='w-full py-6 flex justify-between items-center text-xl font-bold'>
                 <div>{data.title}</div>
                 <div>
                   {data.type === 'income' ? (
-                    <span className='text-green-500 text-xl font-bold'>
-                      ₦ {data.amount}
-                    </span>
+                    <span className='text-green-500'>₦ {data.amount}</span>
                   ) : (
-                    <span className='text-red-500 text-xl font-bold'>
-                      ₦ {data.amount}
-                    </span>
+                    <span className='text-red-500'>₦ {data.amount}</span>
                   )}
                 </div>
               </Button>
