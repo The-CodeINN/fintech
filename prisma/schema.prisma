@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  email String @unique
+  hashedPassword String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  description String
+
+  posts Post[]
+
+  joinedThreads Thread[] @relation(fields: [threadId], references: [id])
+  threadId String[] @db.ObjectId
+}
+
+model Post {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User @relation(fields: [authorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  authorId String @db.ObjectId
+
+  thread Thread @relation(fields: [threadId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  threadId String @db.ObjectId
+
+  title String 
+  content String
+  imgurl String?
+}
+
+model Thread {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String @unique
+  description String
+  
+  members User[] @relation(fields: [memberId], references: [id])
+  memberId String[] @db.ObjectId
+
+  posts Post[]
+}
