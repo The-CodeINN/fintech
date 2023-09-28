@@ -1,18 +1,20 @@
-'use client';
-
 import { Montserrat } from 'next/font/google';
 import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { CreditCard } from 'lucide-react';
+import getCurrentUser from '../actions/getCurrentUser';
+import SignInButton from '../signIn';
 
 const font = Montserrat({
   weight: '600',
   subsets: ['latin'],
 });
 
-const LandingNavbar = () => {
+export default async function LandingNavbar() {
+  const user = await getCurrentUser();
+
   return (
     <nav className='px-4 pt-6 bg-transparent flex items-center justify-between'>
       <Link href='/' className='flex items-center'>
@@ -24,15 +26,16 @@ const LandingNavbar = () => {
         </h1>
       </Link>
       <div className='flex items-center gap-x-2'>
-        {/* <Link href={isSignedIn ? '/dashboard' : '/sign-up'}> */}
-        <Link href='/register'>
-          <Button variant='outline' className='rounded-full'>
-            Login
-          </Button>
-        </Link>
+        {user ? (
+          <div className='flex items-center gap-2'>
+            <Button className='text-white bg-transparent border border-white rounded-full'>
+              <Link href='/dashboard'>Dashboard</Link>
+            </Button>
+          </div>
+        ) : (
+          <SignInButton />
+        )}
       </div>
     </nav>
   );
-};
-
-export default LandingNavbar;
+}

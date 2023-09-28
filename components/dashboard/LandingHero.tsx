@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import getCurrentUser from '../actions/getCurrentUser';
+import SignInButton from '../signIn';
 
-const LandingHero = () => {
+export default async function LandingHero() {
+  const user = await getCurrentUser();
+
   return (
     <div className='text-white font-bold py-36 text-center space-y-5'>
       <div className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold'>
@@ -14,17 +18,17 @@ const LandingHero = () => {
         solution for finance and investments
       </div>
       <div>
-        <Link href='/register'>
+        {user ? (
           <Button
             variant='premium'
             className='md:text-lg p-4 md:p-6 rounded-full font-semibold'
           >
-            Get Started
+            <Link href='/dashboard'>Go to Dashboard</Link>
           </Button>
-        </Link>
+        ) : (
+          <SignInButton />
+        )}
       </div>
     </div>
   );
-};
-
-export default LandingHero;
+}
