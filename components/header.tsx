@@ -26,7 +26,9 @@ export default async function Header() {
           <SignInButton />
         )}
 
-        <ModeToggle />
+        <section className='hidden md:block'>
+          <ModeToggle />
+        </section>
       </div>
     </header>
   );
