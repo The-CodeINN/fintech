@@ -39,7 +39,7 @@ const Dashboard = () => {
     <div>
       <section className='py-3'>
         <small className='text-gray-400 text-md'>My Balance</small>
-        <h2 className='text-4xl font-bold'>$ 100, 000</h2>
+        <h2 className='text-4xl font-bold'>₦ 100, 000</h2>
       </section>
 
       <section className='flex items-center gap-2 py-3'>
@@ -55,16 +55,16 @@ const Dashboard = () => {
         <div className='flex flex-col gap-4 mt-6'>
           {data.map((data) => (
             <div key={data.id}>
-              <Button className='w-full py-4 flex justify-between items-center'>
+              <Button className='w-full py-6 flex justify-between items-center'>
                 <div>{data.title}</div>
                 <div>
                   {data.type === 'income' ? (
                     <span className='text-green-500 text-xl font-bold'>
-                      {data.amount}
+                      ₦ {data.amount}
                     </span>
                   ) : (
                     <span className='text-red-500 text-xl font-bold'>
-                      {data.amount}
+                      ₦ {data.amount}
                     </span>
                   )}
                 </div>
